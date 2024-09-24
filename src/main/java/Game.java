@@ -8,13 +8,15 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
-;
+
 public class Game {
     private final TerminalScreen screen;
-    private int x = 10;
-    private int y = 10;
-    public Game(int  width, int height) throws IOException {
+    private Hero hero;
+    private int x;
+    private int y;
 
+
+    public Game(int  width, int height) throws IOException {
 
         Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
         screen = new TerminalScreen(terminal);
@@ -22,11 +24,13 @@ public class Game {
         screen.startScreen();             // screens must be started
         screen.doResizeIfNecessary();     // resize screen if necessary
         TerminalSize terminalSize = new TerminalSize(width, height);
+        hero = new Hero(10, 10);
 
     }
     private void draw() throws IOException {
         screen.clear();
-        screen.setCharacter(x, y, TextCharacter.fromCharacter('X')[0]);
+        hero.draw(screen);
+
         screen.refresh();
 
     }
@@ -46,16 +50,16 @@ public class Game {
         String keyT = key.getKeyType().toString();
         switch (keyT) {
             case "ArrowUp":
-                y = y - 1;
+                hero.moveup();
                 break;
             case "ArrowDown":
-                y = y + 1;
+                hero.movedown();
                 break;
             case "ArrowLeft":
-                x = x - 1;
+                hero.moveleft();
                 break;
             case "ArrowRight":
-                x = x + 1;
+                hero.moveright();
                 break;
         }
     }
