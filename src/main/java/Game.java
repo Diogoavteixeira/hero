@@ -31,9 +31,9 @@ public class Game {
     }
     private void draw() throws IOException {
         screen.clear();
-        arena.draw(screen);
+        arena.draw(screen.newTextGraphics());
         screen.refresh();
-        //hero.draw(screen);
+
 
     }
     public void run() throws IOException {
@@ -48,29 +48,10 @@ public class Game {
             arena.processKey(key);
         }
     }
-    /*private void processKey (KeyStroke key){
-        System.out.println(key);
-        String keyT = key.getKeyType().toString();
-        switch (keyT){
-            case"ArrowUp":
-                moveHero(hero.moveUp());
-                break;
-            case"ArrowDown":
-                moveHero(hero.moveDown());
-                break;
-            case"ArrowLeft":
-                moveHero(hero.moveLeft());
-                break;
-            case"ArrowRight":
-                moveHero(hero.moveRight());
-                break;
 
-        }*/
 }
 
-   // private void moveHero(Position position) {
-        //hero.setPosition(position);
-    //}
+
 
 
 
