@@ -7,13 +7,14 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class Game {
     private final TerminalScreen screen;
-    private Hero hero;
-    private int x;
-    private int y;
+    //private int x =10;
+    //private int y =10;
+    private Hero hero ;
 
 
     public Game(int  width, int height) throws IOException {
@@ -24,15 +25,12 @@ public class Game {
         screen.startScreen();             // screens must be started
         screen.doResizeIfNecessary();     // resize screen if necessary
         TerminalSize terminalSize = new TerminalSize(width, height);
-        hero = new Hero(10, 10);
-
+        hero = new Hero (10,10);
     }
     private void draw() throws IOException {
         screen.clear();
         hero.draw(screen);
-
         screen.refresh();
-
     }
     public void run() throws IOException {
         while (true) {
@@ -45,24 +43,30 @@ public class Game {
             processKey(key);
         }
     }
-    private void processKey(KeyStroke key) {
-       System.out.println(key);
+    private void processKey (KeyStroke key){
+        System.out.println(key);
         String keyT = key.getKeyType().toString();
-        switch (keyT) {
-            case "ArrowUp":
-                hero.moveup();
+        switch (keyT){
+            case"ArrowUp":
+                moveHero(hero.moveUp());
                 break;
-            case "ArrowDown":
-                hero.movedown();
+            case"ArrowDown":
+                moveHero(hero.moveDown());
                 break;
-            case "ArrowLeft":
-                hero.moveleft();
+            case"ArrowLeft":
+                moveHero(hero.moveLeft());
                 break;
-            case "ArrowRight":
-                hero.moveright();
+            case"ArrowRight":
+                moveHero(hero.moveRight());
                 break;
+
         }
     }
+
+    private void moveHero(Position position) {
+        hero.setPosition(position);
+    }
+
 }
 
 

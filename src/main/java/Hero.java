@@ -5,31 +5,35 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
-
 public class Hero {
-    int x;
-    int y;
+    private Position position;
+    //int x;
+    //int y;
 
-    public Hero(int x, int y) {
-        this.x=x;
-        this.y=y;
-
+    public Hero(int x, int y) throws IOException {
+        this.position =new Position(x,y);
     }
+    public Position getPosition() {
+        return position;
+    }
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public Position moveUp() {
+        return new Position(position.getX(), position.getY() - 1);
+    }
+    public Position moveDown() {
+        return new Position(position.getX(), position.getY() + 1);
+    }
+    public Position moveLeft() {
+        return new Position(position.getX() - 1, position.getY());
+    }
+    public Position moveRight() {
+        return new Position(position.getX() + 1, position.getY());
+    }
+    //
     public void draw(Screen screen) throws IOException{
-        screen.setCharacter(this.x, this.y, TextCharacter.fromCharacter('X')[0]);
-    }
-    public void moveup() {
-        this.y =this.y -1;
-
-    }
-    public void movedown() {
-        this.y = this.y + 1;
-    }
-    public void moveleft() {
-        this.x =this.x -1;
-
-    }
-    public void moveright() {
-        this.x = this.x + 1;
+        screen.setCharacter(position.getX(), position.getY(), TextCharacter.fromCharacter('X')[0]);
     }
 }
