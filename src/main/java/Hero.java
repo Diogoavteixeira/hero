@@ -5,17 +5,12 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
-public class Hero {
-    private Position position;
+
+
+public class Hero extends Element {
 
     public Hero(int x, int y) throws IOException {
-        this.position =new Position(x,y);
-    }
-    public Position getPosition() {
-        return position;
-    }
-    public void setPosition(Position position) {
-        this.position = position;
+        super(x, y);
     }
 
     public Position moveUp() {
